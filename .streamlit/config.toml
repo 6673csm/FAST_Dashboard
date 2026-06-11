@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#40C4FF"          # Electric Blue
+backgroundColor = "#121212"       # Deep Charcoal
+secondaryBackgroundColor = "#1E1E1E" # Glass Card Base
+textColor = "#FFFFFF"
+font = "sans serif"
