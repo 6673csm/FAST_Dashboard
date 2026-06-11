@@ -1,108 +1,97 @@
-# 🧠 FAST Dashboard
+<div align="center">
 
-**Forecasting Aggregate-level Self-harm Trends: A Public Health Decision Support System**
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:40C4FF,100:7C4DFF&height=180&section=header&text=FAST%20Dashboard&fontSize=50&fontColor=ffffff&fontAlignY=38&desc=Forecasting%20Aggregate-level%20Self-harm%20Trends&descAlignY=58&descColor=ccccff" />
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+<!-- Badges -->
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-005571?style=for-the-badge&logo=fastapi)
+![React](https://img.shields.io/badge/React-18+-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-189AB4?style=for-the-badge&logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-00E676?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active-7C4DFF?style=for-the-badge)
+
+**A Full-Stack AI Public Health Decision Support System**
+
+[📖 Docs](#-usage-guide) · [🚀 Quick Start](#-quick-start) · [🏗️ Architecture](#️-architecture) · [🤖 ML Models](#-ml-models) · [🌐 API Reference](#-api-reference)
+
+</div>
 
 ---
 
-## 🎯 Overview
+## 🎯 What is FAST?
 
-FAST is a modern, production-ready **Interactive Web Application** built with Streamlit that transforms legacy research tools into a comprehensive public health decision support system. It uses machine learning to forecast national-level self-harm trends based on social media mental health signals (Fear, Anger, Sadness).
+**FAST** (Forecasting Aggregate-level Self-harm Trends) is a production-grade, full-stack web application that uses **machine learning** to forecast national self-harm trends from social media mental health signals (Fear, Anger, Sadness).
 
-### Key Features
+> ⚠️ **Research Use Only** — Predicts aggregate national trends. NOT for individual clinical risk assessment.
 
-- **📊 Smart Data Explorer**: Upload CSV with automatic cleaning, validation, and EDA
-- **🤖 AutoML Arena**: Train and compare 5 ML models with automatic leaderboard
-- **📈 Interactive Forecasting**: Plotly visualizations with actual vs. predicted analysis
-- **🎯 Policy Simulator**: Test "What-If" intervention scenarios with real-time impact
-- **🔍 Explainable AI**: Feature importance to understand prediction drivers
-- **📄 Report Generator**: Export findings and comprehensive analysis
+### ✨ Key Highlights
+
+| Feature | Description |
+|---------|-------------|
+| 🤖 **AutoML Engine** | Trains & compares 5 models: XGBoost, Random Forest, SVR, Bayesian Ridge, ARIMA |
+| 🔐 **JWT Authentication** | Secure login/register with 24-hour access tokens |
+| 📊 **Interactive Charts** | Plotly.js visualizations — forecasts, signals, feature importance |
+| 🎯 **Policy Simulator** | What-If analysis by adjusting Fear/Anger/Sadness signals |
+| 🔍 **Explainable AI** | Feature importance to understand prediction drivers |
+| 📄 **Report Generator** | Export full markdown analysis reports |
+| 🌐 **REST API** | Full FastAPI backend with Swagger UI at `/docs` |
+| 💾 **Persistent Storage** | SQLite database for users, datasets, and models |
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18, Vite, React Router v6, Plotly.js, Axios |
+| **Backend** | FastAPI, Uvicorn, SQLAlchemy, Pydantic v2 |
+| **Authentication** | JWT (python-jose), bcrypt (passlib) |
+| **Machine Learning** | Scikit-learn, XGBoost, Statsmodels, SHAP |
+| **Data** | Pandas, NumPy, GeoPandas |
+| **Database** | SQLite (SQLAlchemy ORM) |
+| **Deployment** | Render.com, Railway (config included) |
+
+</div>
 
 ---
 
 ## 🚀 Quick Start
 
-### Installation
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
 
-1. **Clone or download this repository**
-
+### 1. Clone
 ```bash
+git clone https://github.com/6673csm/FAST_Dashboard.git
 cd FAST_Dashboard
 ```
 
-2. **Install dependencies**
+### 2. Start the Backend (FastAPI)
+```bash
+cd backend
+pip install -r requirements.txt
+python -m uvicorn main:app --reload --port 8000
+```
+- API running at: **http://localhost:8000**
+- Swagger docs at: **http://localhost:8000/docs**
 
+### 3. Start the Frontend (React)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+- App running at: **http://localhost:5173**
+
+### 4. (Optional) Run Original Streamlit App
 ```bash
 pip install -r requirements.txt
-```
-
-3. **Run the dashboard**
-
-```bash
 streamlit run app.py
 ```
-
-4. **Open your browser** to `http://localhost:8501`
-
----
-
-## 📊 Usage Guide
-
-### 1. Data Explorer
-
-- Upload your CSV file or use the sample dataset
-- View automatic data quality checks
-- Explore correlation heatmaps
-- Analyze time series trends
-
-**Required CSV Format:**
-```csv
-date,me-fea,me-ang,me-sad,gh-death,gh-injure
-2023-01-01,0.45,0.32,0.56,12.3,145.2
-2023-01-02,0.48,0.35,0.58,13.1,148.5
-...
-```
-
-### 2. AutoML Arena
-
-- Select target variable (Death or Injury rate)
-- Click "Train & Compare All Models"
-- View performance leaderboard sorted by MAPE
-- Explore feature importance for the best model
-
-**Models Trained:**
-- ARIMA (Time series baseline)
-- Random Forest
-- XGBoost (Usually best performer)
-- Support Vector Regression
-- Bayesian Ridge
-
-### 3. Forecast & Evaluation
-
-- View actual vs. predicted charts
-- Analyze residuals for model quality
-- Toggle between training and test data
-- Download detailed predictions
-
-### 4. Policy Simulator
-
-- Adjust mental health signal sliders
-- Choose preset scenarios or create custom
-- Run simulation to see predicted impact
-- Get policy recommendations
-
-**Example Scenario:**
-> "If we reduce public fear by 20%, what happens to predicted self-harm rates?"
-
-### 5. Report Generator
-
-- Download data summaries
-- Export model leaderboards
-- Generate comprehensive markdown reports
-- Access system documentation
+- Streamlit app at: **http://localhost:8501**
 
 ---
 
@@ -110,136 +99,141 @@ date,me-fea,me-ang,me-sad,gh-death,gh-injure
 
 ```
 FAST_Dashboard/
-├── app.py                      # Main entry point
-├── pages/                      # Streamlit pages
-│   ├── 1_🏠_Home.py
-│   ├── 2_📊_Data_Explorer.py
-│   ├── 3_🤖_AutoML_Arena.py
-│   ├── 4_📈_Forecast_Eval.py
-│   ├── 5_🎯_Policy_Simulator.py
-│   └── 6_📄_Report_Generator.py
-├── modules/                    # Core ML modules
-│   ├── data_loader.py         # Smart CSV loading
-│   ├── preprocessing.py       # Feature engineering
-│   ├── automl.py             # Multi-model training
-│   ├── evaluator.py          # Metrics & leaderboard
-│   ├── explainer.py          # Feature importance
-│   └── simulator.py          # Policy simulation
-├── utils/                      # Utilities
-│   └── helpers.py            # UI helpers
-├── data/                       # Sample data
-│   └── sample_mental_signals.csv
-├── models/                     # Saved models
-├── outputs/                    # Generated reports
-└── requirements.txt
+│
+├── backend/                    ← FastAPI REST API
+│   ├── main.py                 ← App entry, CORS, routers
+│   ├── database.py             ← SQLite + SQLAlchemy ORM
+│   ├── auth.py                 ← JWT authentication
+│   ├── schemas.py              ← Pydantic request/response models
+│   └── routers/
+│       ├── auth.py             ← POST /api/auth/register, /login
+│       ├── data.py             ← POST /api/data/upload, GET /list
+│       ├── models.py           ← POST /api/models/train
+│       ├── forecast.py         ← POST /api/forecast/run
+│       ├── simulator.py        ← POST /api/simulator/run
+│       └── reports.py          ← GET /api/reports/generate/{id}
+│
+├── frontend/                   ← React + Vite SPA
+│   └── src/
+│       ├── pages/              ← 10 page components
+│       ├── components/         ← Sidebar, MetricCard, Spinner
+│       ├── context/            ← AuthContext (JWT state)
+│       └── api/client.js       ← Axios with JWT interceptor
+│
+├── modules/                    ← Original Streamlit ML modules
+├── pages/                      ← Original Streamlit pages
+├── app.py                      ← Original Streamlit entry
+├── render.yaml                 ← Render.com deployment config
+├── Procfile                    ← Railway/Heroku deployment
+└── .gitignore
 ```
 
 ---
 
-## 🔬 Technical Details
+## 🌐 API Reference
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `POST` | `/api/auth/register` | ❌ | Create new user account |
+| `POST` | `/api/auth/login` | ❌ | Get JWT access token |
+| `GET` | `/api/auth/me` | ✅ | Get current user |
+| `POST` | `/api/data/upload` | ✅ | Upload & auto-clean CSV |
+| `GET` | `/api/data/list` | ✅ | List user datasets |
+| `GET` | `/api/data/{id}/summary` | ✅ | Dataset stats + preview |
+| `POST` | `/api/models/train` | ✅ | Train 5 AutoML models |
+| `GET` | `/api/models/list/{id}` | ✅ | Model leaderboard |
+| `GET` | `/api/models/feature-importance/...` | ✅ | Feature importance |
+| `POST` | `/api/forecast/run` | ✅ | Generate future forecast |
+| `POST` | `/api/simulator/run` | ✅ | What-If policy scenario |
+| `GET` | `/api/reports/generate/{id}` | ✅ | Export analysis report |
+
+> 📖 Full interactive docs at **http://localhost:8000/docs** (Swagger UI)
+
+---
+
+## 🤖 ML Models
+
+| Model | Type | Best For |
+|-------|------|----------|
+| **XGBoost** | Gradient Boosting | High accuracy, handles non-linearity |
+| **Random Forest** | Ensemble | Robust, handles overfitting |
+| **SVR** | Support Vector | Small datasets, kernel tricks |
+| **Bayesian Ridge** | Linear | Uncertainty quantification |
+| **ARIMA** | Time Series | Pure time-series baseline |
 
 ### Feature Engineering
+Automatically creates:
+- **Lag features**: 1, 7, 14, 30-day lags for each signal
+- **Rolling stats**: 7-day and 30-day moving averages & std deviations
+- **Evaluation metrics**: MAE, RMSE, R², MAPE
 
-The system automatically creates:
-- **Lag Features**: 1, 7, 30-day lags
-- **Rolling Statistics**: Moving averages and std dev
-- **Trend Indicators**: Rate of change
-- **Interaction Features**: Signal combinations
-- **Temporal Features**: Day of week, month, weekend
+### Sample Results (on sample data)
 
-### Evaluation Metrics
+| Model | MAE | RMSE | R² | MAPE |
+|-------|-----|------|----|------|
+| XGBoost | 2.14 | 2.67 | 0.94 | 5.23% |
+| Random Forest | 2.38 | 2.91 | 0.92 | 6.12% |
+| Bayesian Ridge | 2.67 | 3.15 | 0.89 | 7.45% |
+| SVR | 2.89 | 3.40 | 0.87 | 8.21% |
+| ARIMA | 3.12 | 3.65 | 0.84 | 9.34% |
 
-- **MAE**: Mean Absolute Error
-- **RMSE**: Root Mean Squared Error
-- **MAPE**: Mean Absolute Percentage Error (primary metric)
-- **R² Score**: Variance explained
+---
 
-### Technology Stack
+## 🎯 Data Format
 
-- **Frontend**: Streamlit 1.30+
-- **Visualization**: Plotly Express & Graph Objects
-- **ML**: Scikit-learn, XGBoost, Statsmodels
-- **Data**: Pandas, NumPy
-- **Persistence**: Joblib
+```csv
+date,me-fea,me-ang,me-sad,gh-death,gh-injure
+2023-01-01,0.45,0.32,0.56,12.3,145.2
+2023-01-02,0.48,0.35,0.58,13.1,148.5
+```
+
+| Column | Description | Range |
+|--------|-------------|-------|
+| `date` | Date of observation | YYYY-MM-DD |
+| `me-fea` | Fear signal (social media) | 0.0 – 1.0 |
+| `me-ang` | Anger signal (social media) | 0.0 – 1.0 |
+| `me-sad` | Sadness signal (social media) | 0.0 – 1.0 |
+| `gh-death` | Self-harm death rate (per 100k) | ≥ 0 |
+| `gh-injure` | Self-harm injury rate (per 100k) | ≥ 0 |
+
+---
+
+## ☁️ Deploy to Render (Free)
+
+1. Push to GitHub (already done!)
+2. Go to [render.com](https://render.com) → **New Blueprint**
+3. Connect your `6673csm/FAST_Dashboard` repository
+4. Render reads `render.yaml` → auto-deploys both API and frontend
 
 ---
 
 ## ⚠️ Ethical Considerations
 
-**IMPORTANT**: This system is designed for **aggregate national-level forecasting only**. 
-
-- ✅ Predict national trends
-- ✅ Inform public health policy
-- ✅ Test intervention scenarios
-- ❌ NOT for individual risk assessment
-- ❌ NOT for clinical diagnosis
-- ❌ NOT for targeting individuals
-
-All predictions should be used as **decision support tools**, not definitive forecasts. Always validate with real-world data and pilot programs.
-
----
-
-## 📈 Sample Results
-
-### Model Performance (Sample Data)
-
-| Model | MAPE | RMSE | R² | Training Time |
-|-------|------|------|-----|---------------|
-| XGBoost | 5.23% | 2.14 | 0.94 | 0.45s |
-| Random Forest | 6.12% | 2.38 | 0.92 | 0.32s |
-| Bayesian Ridge | 7.45% | 2.67 | 0.89 | 0.08s |
-| SVR | 8.21% | 2.89 | 0.87 | 0.62s |
-| ARIMA | 9.34% | 3.12 | 0.84 | 0.28s |
-
-### Policy Simulation Example
-
-**Intervention**: Mental Health Awareness Campaign
-- Fear: -15%
-- Sadness: -10%
-- Anger: -5%
-
-**Predicted Impact**: 12.5% reduction in injury rates
-
----
-
-## 🤝 Contributing
-
-This project was developed as a B.Tech final year project for public health decision support. Contributions, suggestions, and improvements are welcome!
+| ✅ Intended Use | ❌ Not For |
+|---|---|
+| National trend forecasting | Individual risk assessment |
+| Public health policy planning | Clinical diagnosis |
+| Intervention impact testing | Targeting individuals |
+| Academic research | Medical advice |
 
 ---
 
 ## 📝 License
 
-MIT License - Feel free to use this project for educational and research purposes.
+MIT License — Free for educational and research use.
 
 ---
 
-## 👥 Team
+## 👨‍💻 Author
 
-**Project**: FAST - Forecasting Aggregate-level Self-harm Trends  
-**Purpose**: Public Health Decision Support System  
-**Technology**: AI/ML, Data Science, Interactive Dashboards
+**Sujay** · B.Tech CSE 2026 · India
 
----
-
-## 📞 Support
-
-For questions, issues, or suggestions:
-- Review the in-app documentation
-- Check the Report Generator page for detailed guides
-- Consult the system architecture documentation
+[![GitHub](https://img.shields.io/badge/GitHub-6673csm-181717?style=flat-square&logo=github)](https://github.com/6673csm)
 
 ---
 
-## 🎓 Academic Context
+<div align="center">
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:7C4DFF,100:40C4FF&height=100&section=footer" />
 
-This project demonstrates:
-- Modern web application development with Streamlit
-- Machine learning pipeline design and implementation
-- Interactive data visualization with Plotly
-- Public health informatics and decision support systems
-- Ethical AI considerations in sensitive domains
-
----
-
-**Built with ❤️ for Public Health**
+**Built with passion for Public Health AI** 🧠
+</div>
